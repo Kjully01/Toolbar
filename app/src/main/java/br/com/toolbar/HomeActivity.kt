@@ -1,7 +1,9 @@
 package br.com.toolbar
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import br.com.toolbar.databinding.ActivityHomeBinding
 
@@ -20,6 +22,18 @@ class HomeActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
+
+        binding.toolbar.setOnMenuItemClickListener { item ->
+            when(item.itemId){
+                R.id.itemSettings -> {
+                    Intent(this@HomeActivity, SettingActivity::class.java).also {
+                        startActivity(it)
+                    }
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -31,5 +45,10 @@ class HomeActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
