@@ -17,13 +17,12 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
+        setSupportActionBar(binding.toolbar.toolbar)
 
         val actionBar = supportActionBar
-        actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.title = ""
 
-        binding.toolbar.setOnMenuItemClickListener { item ->
+        binding.toolbar.toolbar.setOnMenuItemClickListener { item ->
             when(item.itemId){
                 R.id.itemSettings -> {
                     Intent(this@HomeActivity, SettingActivity::class.java).also {
@@ -34,17 +33,6 @@ class HomeActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            android.R.id.home -> {
-                onBackPressed()
-                return true
-            }
-        }
-
-        return super.onOptionsItemSelected(item)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
